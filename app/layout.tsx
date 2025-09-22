@@ -1,6 +1,7 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Providers } from '@/components/Providers';
 import { FeatureFlagProvider } from '@/components/FeatureFlagProvider';
 import { SiteShell } from '@/components/SiteShell';
@@ -42,11 +43,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <Providers>
-          <FeatureFlagProvider>
-            <SiteShell>{children}</SiteShell>
-          </FeatureFlagProvider>
+          <Suspense fallback={<SaleBannerFallback />}>
+            <FeatureFlagProvider>
+              <SiteShell>{children}</SiteShell>
+            </FeatureFlagProvider>
+          </Suspense>
         </Providers>
       </body>
     </html>
+  );
+}
+
+function SaleBannerFallback() {
+  return (
+    <div className="site-shell">
+      <div className="feature-banner">
+        <div className="sale-banner-fallback">This domain is for sale for $1999.</div>
+      </div>
+    </div>
   );
 }
