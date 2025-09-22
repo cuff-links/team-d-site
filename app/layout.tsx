@@ -1,11 +1,9 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Providers } from '@/components/Providers';
 import { FeatureFlagProvider } from '@/components/FeatureFlagProvider';
-import { FeatureBanner } from '@/components/FeatureBanner';
-import { ClearFeatureFlagButton } from '@/components/ClearFeatureFlagButton';
+import { SiteShell } from '@/components/SiteShell';
 import { studioInfo } from '@/data/studio';
 
 export const metadata: Metadata = {
@@ -40,35 +38,12 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const currentYear = new Date().getFullYear();
-
   return (
     <html lang="en">
       <body>
         <Providers>
           <FeatureFlagProvider>
-            <div className="site-shell">
-              <FeatureBanner />
-              <header className="site-header">
-                <div className="site-header__brand">
-                  <span className="site-logo">TD</span>
-                  <div>
-                    <p className="site-title">{studioInfo.name}</p>
-                    <p className="site-tagline">{studioInfo.tagline}</p>
-                  </div>
-                </div>
-                <nav className="site-nav">
-                  <Link href="/">Home</Link>
-                  <Link href="/games">Projects</Link>
-                  <Link href="/contact">Contact</Link>
-                </nav>
-              </header>
-              <main className="site-main">{children}</main>
-              <footer className="site-footer">
-                <p>© 2019-{currentYear} {studioInfo.name}. Handcrafted worlds, shared with love.</p>
-                <ClearFeatureFlagButton />
-              </footer>
-            </div>
+            <SiteShell>{children}</SiteShell>
           </FeatureFlagProvider>
         </Providers>
       </body>
