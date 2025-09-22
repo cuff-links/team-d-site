@@ -106,6 +106,10 @@ a:hover {
 }
 
 .site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
   text-align: center;
   font-size: 0.85rem;
   color: var(--text-muted);
@@ -486,6 +490,10 @@ a:hover {
 
 .route-wrapper {
   min-height: 100%;
+}
+
+.feature-banner {
+  margin-bottom: 1.5rem;
 }
 
 @media (max-width: 720px) {
